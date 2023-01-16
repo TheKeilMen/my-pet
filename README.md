@@ -1,5 +1,7 @@
 # my-pet
 
+Description: pet-project for Strada
+
 ## Preparing
 
 - `git clone "this repocitory"`
