@@ -1,0 +1,17 @@
+.Header {
+  display: flex;
+  position: relative;
+  background-color: blue;
+  height: 30px;
+  padding: 10px;
+  color: white;
+}
+
+.login {
+  position: absolute;
+  right: 1vh;
+  padding: 5px;
+  background-color: green;
+  color: white;
+  border-radius: 5px;
+}

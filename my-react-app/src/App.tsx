@@ -1,34 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React, { useEffect, useState } from 'react';
+import './App.css';
+import { Films } from './components/films/Films';
+import { Filters } from './components/filters/Filters';
+import { Header } from './components/header/Header';
+import { FILMS_LIST } from './mocks';
+
+const maxPages = FILMS_LIST.length / 10;
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [filmsList, setFilms] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [counter, setCounter] = useState(0);
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    useEffect(() => {
+        const newList = FILMS_LIST.slice(counter, counter + 10);
+        const count = setCounter(counter + 10);
+        setFilms(newList);
+    }, []);
+
+    const changeHandle = (e: Event) => {
+        console.log(e.target.value);
+    };
+
+    function addNextPage() {
+        const newList = FILMS_LIST.slice(counter, counter + 10);
+        setFilms(newList);
+        const count = () => setCounter(counter + 10);
+        console.log(counter);
+    }
+
+    function addPreviousPage() {
+        const newList = FILMS_LIST.slice(counter - 10, counter);
+        setFilms(newList);
+        const count = () => setCounter(counter - 10);
+        console.log(counter);
+    }
+
+    return (
+        <div className="App">
+            <Header />
+            <div className="Content">
+                <Filters
+                    addNextPage={addNextPage}
+                    addPreviousPage={addPreviousPage}
+                    counter={counter}
+                    list={filmsList}
+                    currentPage={1}
+                    maxPages={maxPages}
+                    setCounter={setCounter}
+                    changeHandle={changeHandle}
+                />
+                <Films data={filmsList} />
+            </div>
+        </div>
+    );
 }
 
-export default App
+export { App };
