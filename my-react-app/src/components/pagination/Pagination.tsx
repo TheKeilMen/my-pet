@@ -3,36 +3,31 @@ import { useDispatch } from 'react-redux';
 import { prevPageAction, addPageAction } from '../../redux/actions/pages';
 import { FILMS_LIST } from '../../assets/mocks';
 import { store } from '../../redux/store';
+import { useSelector } from 'react-redux';
 
 const itemsLimit = Math.ceil(FILMS_LIST.length / 10);
 
 function Pagination() {
+  const currentPage = useSelector((state) => state.currentPage);
   const dispatch = useDispatch();
 
   function addNextPage() {
     if (store.getState().currentPage >= 240) {
-      FILMS_LIST.slice(
-        store.getState().currentPage,
-        store.getState().currentPage + 10
-      );
+      const newList = FILMS_LIST.slice(currentPage, currentPage + 10);
+      dispatch(addPageAction(newList));
       return;
     }
-    const newList = FILMS_LIST.slice(
-      store.getState().currentPage,
-      store.getState().currentPage + 10
-    );
+    const newList = FILMS_LIST.slice(currentPage, currentPage + 10);
     dispatch(addPageAction(newList));
   }
 
   function addPreviousPage() {
-    if (store.getState().currentPage < 10) {
-      FILMS_LIST.slice(0, 10);
+    if (currentPage < 10) {
+      const newList = FILMS_LIST.slice(0, 10);
+      dispatch(prevPageAction(newList));
       return;
     }
-    const newList = FILMS_LIST.slice(
-      store.getState().currentPage - 10,
-      store.getState().currentPage
-    );
+    const newList = FILMS_LIST.slice(currentPage - 10, currentPage);
     dispatch(prevPageAction(newList));
   }
 
