@@ -1,36 +1,46 @@
 import { FILMS_LIST } from '../../assets/mocks';
 import { ADD_NEXT_PAGE, ADD_PREVIOUS_PAGE } from '../actions/action-types';
 
-const inicialState = {
+const inicialState: {
+  currentPage: number;
+  array: object[];
+} = {
   currentPage: 10,
-  maxPage: Math.ceil(FILMS_LIST.length / 10),
+  array: FILMS_LIST.slice(0, 10),
 };
 
 export function reducer(
-  state: { currentPage: number; maxPage: number } = inicialState,
+  state: {
+    currentPage: number;
+    array: object[];
+  } = inicialState,
   action?: { type: string; currentPage: number; array: object[] }
 ) {
   if (action) {
     if (action.currentPage < inicialState.currentPage) {
       return {
+        ...state,
         currentPage: inicialState.currentPage,
         array: action.array,
       };
     }
-    if (action.currentPage >= 240) {
+    if (action.currentPage >= FILMS_LIST.length) {
       return {
-        currentPage: 240,
+        ...state,
+        currentPage: FILMS_LIST.length,
         array: action.array,
       };
     }
     switch (action.type) {
       case ADD_NEXT_PAGE:
         return {
+          ...state,
           currentPage: action.currentPage,
           array: action.array,
         };
       case ADD_PREVIOUS_PAGE:
         return {
+          ...state,
           currentPage: action.currentPage,
           array: action.array,
         };

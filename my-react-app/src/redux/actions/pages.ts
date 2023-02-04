@@ -3,7 +3,7 @@ import { ADD_NEXT_PAGE, ADD_PREVIOUS_PAGE } from './action-types';
 
 const maxItemsOnPage = 10;
 
-export function addPage(array: object[]): {
+export function addPageAction(array: object[]): {
   type: string;
   currentPage: number;
   array: object[];
@@ -15,7 +15,7 @@ export function addPage(array: object[]): {
   };
 }
 
-export function prevPage(array: object[]): {
+export function prevPageAction(array: object[]): {
   type: string;
   currentPage: number;
   array: object[];

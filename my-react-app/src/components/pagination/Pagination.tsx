@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-
-import { prevPage, addPage } from '../../redux/actions/pages';
+import { prevPageAction, addPageAction } from '../../redux/actions/pages';
 import { FILMS_LIST } from '../../assets/mocks';
 import { store } from '../../redux/store';
 
 const itemsLimit = Math.ceil(FILMS_LIST.length / 10);
 
-function Pagination({ setFilms }) {
+function Pagination() {
   const dispatch = useDispatch();
-
-  // const [filmsListPagination, setFilmsPagination] = useState([]);
-
-  useEffect(() => {
-    const newList = FILMS_LIST.slice(0, 10);
-    setFilms(newList);
-  }, []);
 
   function addNextPage() {
     if (store.getState().currentPage >= 240) {
@@ -29,8 +21,7 @@ function Pagination({ setFilms }) {
       store.getState().currentPage,
       store.getState().currentPage + 10
     );
-    setFilms(newList);
-    dispatch(addPage(newList));
+    dispatch(addPageAction(newList));
   }
 
   function addPreviousPage() {
@@ -42,8 +33,7 @@ function Pagination({ setFilms }) {
       store.getState().currentPage - 10,
       store.getState().currentPage
     );
-    setFilms(newList);
-    dispatch(prevPage(newList));
+    dispatch(prevPageAction(newList));
   }
 
   return (

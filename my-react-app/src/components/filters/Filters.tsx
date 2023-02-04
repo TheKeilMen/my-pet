@@ -23,7 +23,7 @@ const optionsYearsSort = [
   { option: '2017', text: '2017' },
 ];
 
-function Filters({ setFilms }) {
+function Filters() {
   return (
     <div className="Filters">
       <h2>Фильры</h2>
@@ -47,7 +47,7 @@ function Filters({ setFilms }) {
         label="years-selector"
       />
       <Checkbox genres={GENRES} />
-      <Pagination setFilms={setFilms} />
+      <Pagination />
     </div>
   );
 }

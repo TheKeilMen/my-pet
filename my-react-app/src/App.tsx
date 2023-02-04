@@ -18,14 +18,16 @@ export const pageContext = createContext([]);
 function App() {
   const [filmsList, setFilms] = useState([]);
 
-  store.subscribe(() => console.log(store.getState()));
+  store.subscribe(() => {
+    console.log(store.getState());
+  });
 
   return (
     <div className="App">
       <Header />
       <div className="Content">
         <pageContext.Provider value={filmsList}>
-          <Filters setFilms={setFilms} />
+          <Filters />
           <Films />
         </pageContext.Provider>
       </div>
