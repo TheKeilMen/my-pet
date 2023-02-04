@@ -7,12 +7,9 @@ import { store } from '../../redux/store';
 import { useSelector } from 'react-redux';
 
 function Card() {
-  const [films, setFilms] = useState([]);
+  const films = useSelector((state) => state.array);
 
-  store.subscribe(() => {
-    setFilms(store.getState().array);
-  });
-
+  console.log(films);
   return films.map((item) => (
     <div key={item.id} id={item.id} className="film-card">
       <img

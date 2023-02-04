@@ -13,11 +13,7 @@ import { Header } from './components/header/header';
 import { store } from './redux/store';
 import { FILMS_LIST } from './assets/mocks';
 
-export const pageContext = createContext([]);
-
 function App() {
-  const [filmsList, setFilms] = useState([]);
-
   store.subscribe(() => {
     console.log(store.getState());
   });
@@ -26,10 +22,8 @@ function App() {
     <div className="App">
       <Header />
       <div className="Content">
-        <pageContext.Provider value={filmsList}>
-          <Filters />
-          <Films />
-        </pageContext.Provider>
+        <Filters />
+        <Films />
       </div>
     </div>
   );

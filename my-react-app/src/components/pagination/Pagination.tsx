@@ -12,7 +12,7 @@ function Pagination() {
   const dispatch = useDispatch();
 
   function addNextPage() {
-    if (store.getState().currentPage >= 240) {
+    if (currentPage >= 240) {
       const newList = FILMS_LIST.slice(currentPage, currentPage + 10);
       dispatch(addPageAction(newList));
       return;

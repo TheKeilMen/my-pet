@@ -1,6 +1,8 @@
 import { FILMS_LIST } from '../../assets/mocks';
 import { ADD_NEXT_PAGE, ADD_PREVIOUS_PAGE } from '../actions/action-types';
 
+//может есть у кого возможность завтра или в понедельник созвонится в дс полайфкодить если не решу проблемку, можно даже в несколько человек?
+
 const inicialState: {
   currentPage: number;
   array: object[];
@@ -10,10 +12,7 @@ const inicialState: {
 };
 
 export function reducer(
-  state: {
-    currentPage: number;
-    array: object[];
-  } = inicialState,
+  state = inicialState,
   action?: { type: string; currentPage: number; array: object[] }
 ) {
   if (action) {
