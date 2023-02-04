@@ -1,59 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  Context,
+  createContext,
+  SyntheticEvent,
+  useEffect,
+  useState,
+} from 'react';
 import './App.css';
-import { Films } from './components/films/Films';
-import { Filters } from './components/filters/Filters';
-import { Header } from './components/header/Header';
-import { FILMS_LIST } from './mocks';
+import { useDispatch } from 'react-redux';
+import { Films } from './components/films/films';
+import { Filters } from './components/filters/filters';
+import { Header } from './components/header/header';
+import { store } from './redux/store';
+import { FILMS_LIST } from './assets/mocks';
 
-const maxPages = FILMS_LIST.length / 10;
+export const pageContext = createContext([]);
 
 function App() {
-    const [filmsList, setFilms] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [counter, setCounter] = useState(0);
+  const [filmsList, setFilms] = useState([]);
 
-    useEffect(() => {
-        const newList = FILMS_LIST.slice(counter, counter + 10);
-        const count = setCounter(counter + 10);
-        setFilms(newList);
-    }, []);
+  store.subscribe(() => console.log(store.getState()));
 
-    const changeHandle = (e: Event) => {
-        console.log(e.target.value);
-    };
-
-    function addNextPage() {
-        const newList = FILMS_LIST.slice(counter, counter + 10);
-        setFilms(newList);
-        const count = () => setCounter(counter + 10);
-        console.log(counter);
-    }
-
-    function addPreviousPage() {
-        const newList = FILMS_LIST.slice(counter - 10, counter);
-        setFilms(newList);
-        const count = () => setCounter(counter - 10);
-        console.log(counter);
-    }
-
-    return (
-        <div className="App">
-            <Header />
-            <div className="Content">
-                <Filters
-                    addNextPage={addNextPage}
-                    addPreviousPage={addPreviousPage}
-                    counter={counter}
-                    list={filmsList}
-                    currentPage={1}
-                    maxPages={maxPages}
-                    setCounter={setCounter}
-                    changeHandle={changeHandle}
-                />
-                <Films data={filmsList} />
-            </div>
-        </div>
-    );
+  return (
+    <div className="App">
+      <Header />
+      <div className="Content">
+        <pageContext.Provider value={filmsList}>
+          <Filters setFilms={setFilms} />
+          <Films />
+        </pageContext.Provider>
+      </div>
+    </div>
+  );
 }
 
 export { App };

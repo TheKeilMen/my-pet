@@ -5,24 +5,34 @@
   display: flex;
   position: relative;
   margin: 10px;
-  /* flex-grow: 1; */
 }
 
-.favorites {
+.favorite {
   margin: 5px;
   position: absolute;
   right: 4vh;
   height: 25px;
+  background-color: white;
+  border: 0;
+}
+img[alt='favorite'] {
+  width: 20px;
 }
 
-.watch-later {
+.bookmark {
+  background-color: white;
+  border: 0;
   margin: 5px;
   position: absolute;
   right: 0;
   height: 25px;
 }
 
-img {
+img[alt='bookmark'] {
+  width: 20px;
+}
+
+img[alt='cover'] {
   border-radius: 10px;
   width: 150px;
 }

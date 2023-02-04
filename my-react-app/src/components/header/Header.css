@@ -7,7 +7,7 @@
   color: white;
 }
 
-.login {
+#login {
   position: absolute;
   right: 1vh;
   padding: 5px;

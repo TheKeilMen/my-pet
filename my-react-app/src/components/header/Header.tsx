@@ -1,14 +1,14 @@
 import React from 'react';
-import './Header.css';
+import './header.css';
 
 function Header() {
   return (
     <div className="Header">
       <div className="home">
-        <span>Home</span>
+        <span> Home </span>
       </div>
-      <button type="button" className="login">
-        <label htmlFor="login">login </label>
+      <button type="button" id="login">
+        <span> login </span>
       </button>
     </div>
   );

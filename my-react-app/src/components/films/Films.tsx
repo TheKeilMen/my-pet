@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Films.css';
 import { Card } from '../card/card';
 
-function Films({ data }) {
-    return (
-        <div className="Films-container">
-            <Card data={data} />
-        </div>
-    );
+function Films() {
+  return (
+    <div className="Films-container">
+      <Card />
+    </div>
+  );
 }
 
 export { Films };
